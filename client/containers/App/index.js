@@ -39,7 +39,7 @@ class App extends React.Component {
             <div className="play-area-cards__items">
               {this.props.cards ?
                 this.props.cards.map((card, i) => (
-                  <Card value={card.value} key={i} image={card.image}/>
+                  <Card key={i} image={card.image}/>
                 ))
                 : null
               }

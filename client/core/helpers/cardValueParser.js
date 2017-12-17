@@ -4,10 +4,8 @@ export const getCardNumberValue = value => {
     case 'QUEEN':
     case 'JACK':
       return 10;
-
     case 'ACE':
-      return 1;
-
+      return 11;
     default:
       return parseInt(value);
   }

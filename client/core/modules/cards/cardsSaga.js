@@ -3,13 +3,11 @@ import { constants } from '../../../core/constants';
 import { addCard } from './cardsActions';
 import { endpoint } from '../../api/endpoints';
 import { request } from '../../api/requests';
-import { getCardNumberValue } from '../../helpers/cardValueParser';
 import { onSetScore } from '../score/scoreSaga';
 
 function* onRequestCard({ payload: { cardCount } }) {
   const state = yield select();
   const id = state.deck.get('id');
-  const oldScore = state.score;
   const { response, error } = yield call(request, 'GET', endpoint.draw(id, cardCount));
 
   if (response) {
@@ -19,10 +17,7 @@ function* onRequestCard({ payload: { cardCount } }) {
       data.cards.map(card => {
         const { image, value } = card;
 
-        return put(addCard({
-          image,
-          value: getCardNumberValue(value)
-        }));
+        return put(addCard({ image, value }));
       })
     ]);
   }
